@@ -1,6 +1,7 @@
 import { getStoryblokApi } from "@/storyblok";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { draftMode } from "next/headers";
+import "./globals.css";
 
 const fetchHomePage = async () => {
   const { isEnabled } = await draftMode();
@@ -13,7 +14,7 @@ const fetchHomePage = async () => {
     resolve_relations: "recommended_tours.tours",
   });
   return response.data.story;
-};
+};   
 
 const HomePage = async () => {
   const story = await fetchHomePage();

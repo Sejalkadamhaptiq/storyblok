@@ -1,5 +1,6 @@
 import { RecommendedTour } from "./RecommendedTour";
 import { storyblokEditable } from "@storyblok/react/rsc";
+import "../app/globals.css";
 
 export const RecommendedTours = (params) => {
   return (

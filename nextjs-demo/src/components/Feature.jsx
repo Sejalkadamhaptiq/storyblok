@@ -1,5 +1,5 @@
 import { storyblokEditable } from "@storyblok/react/rsc";
-
+import "../app/globals.css";
 export const Feature = (params) => {
   return (
     <div

@@ -1,6 +1,16 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Your existing images configuration
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'a.storyblok.com',
+      },
+    ],
+  },
 
-const nextConfig: NextConfig = {
+  // Add the new headers function here
   async headers() {
     return [
       {

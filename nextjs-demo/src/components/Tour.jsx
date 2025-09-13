@@ -1,5 +1,6 @@
 import { storyblokEditable } from "@storyblok/react/rsc";
 import Image from "next/image";
+
 import { render } from "storyblok-rich-text-react-renderer";
 
 // Use { blok } to directly access the props, which is cleaner.

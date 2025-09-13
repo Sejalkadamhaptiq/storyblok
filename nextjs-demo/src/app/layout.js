@@ -1,7 +1,6 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { storyblokInit, apiPlugin } from "@storyblok/react/rsc";
 import { StoryblokProvider } from "@/components/StoryblokProvider";
 import Link from "next/link";
 
@@ -20,7 +19,7 @@ export default function RootLayout({ children }) {
           className={`${inter.className} bg-blue-50`}
         >
             <header>
-            <nav className="container mx-auto px-4 w-full py-8 flex justify-between">
+             <nav className="container mx-auto px-4 w-full py-8 flex justify-between">
               <Link href={"/"}>Home</Link>
               <Link href={"/tours"}>Tours</Link>
             </nav>
