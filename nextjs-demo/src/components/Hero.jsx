@@ -1,9 +1,6 @@
-
-
 import { storyblokEditable } from "@storyblok/react/rsc";
 
 export const Hero = (params) => {
-    // console.log(params)
   return (
     <section
       {...storyblokEditable(params.blok)}

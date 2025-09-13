@@ -4,7 +4,6 @@ import {
 } from "@storyblok/react/rsc";
 
 export const Grid = (params) => {
-    
   return (
     <section {...storyblokEditable(params.blok)} className="bg-blue-100 py-16">
       <div className="container mx-auto w-full px-4">

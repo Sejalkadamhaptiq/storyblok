@@ -2,7 +2,6 @@ import { RecommendedTour } from "./RecommendedTour";
 import { storyblokEditable } from "@storyblok/react/rsc";
 
 export const RecommendedTours = (params) => {
-    //    console.log(params);
   return (
     <section
       {...storyblokEditable(params.blok)}
@@ -17,5 +16,5 @@ export const RecommendedTours = (params) => {
         ))}
       </div>
     </section>
-  );
-};
+  );   
+}

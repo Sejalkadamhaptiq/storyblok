@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export const RecommendedTour = (props) => {
-    // console.log(props);
   return (
     <div className="bg-white rounded-sm shadow">
       <img

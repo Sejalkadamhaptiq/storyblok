@@ -1,21 +1,28 @@
-import { getStoryblokApi, StoryblokStory } from "@storyblok/react/rsc";
+import { getStoryblokApi } from "@/storyblok";
+import { StoryblokStory } from "@storyblok/react/rsc";
+import { draftMode } from "next/headers";
 
-// This function now specifically fetches the 'home' story.
-const fetchHomePageStory = async () => {
+const fetchHomePage = async () => {
+  const { isEnabled } = await draftMode();
   const client = getStoryblokApi();
-  // Fetches the story with the slug 'home' from the root of your stories.
   const response = await client.getStory(`home`, {
-    version: "draft",
-    resolve_relations:"recommended_tours.tours"
+    version:
+      process.env.NODE_ENV === "development" || isEnabled
+        ? "draft"
+        : "published",
+    resolve_relations: "recommended_tours.tours",
   });
-
   return response.data.story;
 };
 
-// The main page component that calls the fetch function and renders the story.
 const HomePage = async () => {
-  const story = await fetchHomePageStory();
-  return <StoryblokStory story={story} />;
+  const story = await fetchHomePage();
+  return (
+    <StoryblokStory
+      bridgeOptions={{ resolveRelations: ["recommended_tours.tours"] }}
+      story={story}
+    />
+  );
 };
 
 export default HomePage;

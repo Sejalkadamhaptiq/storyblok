@@ -1,18 +1,13 @@
-
-
 import { storyblokEditable } from "@storyblok/react/rsc";
 
 export const Feature = (params) => {
-    // console.log(params)
   return (
-    <section
+    <div
       {...storyblokEditable(params.blok)}
-      className="container mx-auto px-4 w-full pt-32 pb-16"
+      className="bg-white p-8 rounded-sm shadow"
     >
-      <h1 className="text-center text-5xl md:text-7xl font-bold">
-        {params.blok.headline}
-      </h1>
-      <p className="text-center text-xl mt-8">{params.blok.content}</p>
-    </section>
+      <h3 className="font-bold text-3xl">{params.blok.headline}</h3>
+      <p className="mt-6 text-lg">{params.blok.content}</p>
+    </div>
   );
 };
