@@ -1,13 +1,20 @@
 import { storyblokEditable } from "@storyblok/react/rsc";
-import "../app/globals.css";
-export const Feature = (params) => {
+
+export const Feature = ({ blok }) => {
+  // Use the color from blok.text_color.color, or fallback to red
+  const textColor = blok.text_color?.color ;
+
   return (
-    <div
-      {...storyblokEditable(params.blok)}
-      className="bg-white p-8 rounded-sm shadow"
-    >
-      <h3 className="font-bold text-3xl">{params.blok.headline}</h3>
-      <p className="mt-6 text-lg">{params.blok.content}</p>
+    <div {...storyblokEditable(blok)} className="p-4 text-center">
+      <h2
+        className="text-2xl font-bold"
+        style={{ color: textColor }}  
+      >
+        {blok.headline}
+      </h2>
+      <p style={{ color: textColor }}>
+        {blok.content}
+      </p>
     </div>
   );
 };
