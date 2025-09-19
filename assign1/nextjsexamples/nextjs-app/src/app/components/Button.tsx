@@ -1,20 +1,22 @@
-import { storyblokEditable, type SbBlokData } from "@storyblok/react";
+import Link from 'next/link';
+import type { FC } from 'react';
 
-// Define the type for your button block data
-interface ButtonBlok extends SbBlokData {
-  text: string;
-  link: {
-    cached_url: string;
+// Define the shape of the 'blok' prop using a TypeScript interface
+interface ButtonProps {
+  blok: {
+    text: string;
+    link: {
+      url: string;
+    };
   };
 }
 
-const Button = ({ blok }: { blok: ButtonBlok }) => {
+// Type the component with React.FC (Functional Component) and the props interface
+const Button: FC<ButtonProps> = ({ blok }) => {
+  // Assuming blok.link.url gives you the destination path like '/about' or '/contact'
   return (
-    <a
-      href={blok.link?.cached_url}
-      {...storyblokEditable(blok)}
-      // ✅ All the styling classes are applied here
-      className="
+    <Link href={blok.link.url || '#'}>
+      <button className="
         inline-block
         bg-white
         text-[#004E94] 
@@ -26,11 +28,13 @@ const Button = ({ blok }: { blok: ButtonBlok }) => {
         rounded-sm 
         transition-colors
         hover:bg-gray-200
-      "
-    >
-      {blok.text}
-    </a>
+      ">
+        {blok.text}
+      </button>
+    </Link>
   );
 };
 
 export default Button;
+
+

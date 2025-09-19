@@ -1,20 +1,18 @@
 "use client";
 
-import {
-  storyblokEditable,
-  StoryblokComponent,
-  type SbBlokData,
-} from "@storyblok/react";
+import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
+import Image from "next/image";
+import type { SbBlokData } from "@storyblok/react";
 
-// Define a type for Storyblok's Asset object
+// ... (your interface definitions remain the same)
+
 interface Asset {
   filename: string;
   alt: string;
 }
 
-// Define the type for your Bannerpage block
-interface SecondaryBannerpageBlok extends SbBlokData {
-  headline: string;
+interface SecondaryBannerPageBlok extends SbBlokData {
+ headline: string;
   description: string;
   background_desktop: Asset;
   background_tablet: Asset;
@@ -22,11 +20,10 @@ interface SecondaryBannerpageBlok extends SbBlokData {
   button_blok: SbBlokData[];
 }
 
-const SecondaryBannerpage = ({ blok }: { blok: SecondaryBannerpageBlok }) => {
+
+const SecondaryBannerPage = ({ blok }: { blok: SecondaryBannerPageBlok }) => {
   return (
-    // The main container is relative to position its children.
-    // It has a max-width, is centered, and overflow-hidden to contain the images.
-    <section
+  <section
       className="relative mx-auto max-w-[1349px] overflow-hidden"
       {...storyblokEditable(blok)}
     >
@@ -85,4 +82,4 @@ const SecondaryBannerpage = ({ blok }: { blok: SecondaryBannerpageBlok }) => {
   );
 };
 
-export default SecondaryBannerpage;
+export default SecondaryBannerPage;

@@ -1,6 +1,14 @@
-import { getStoryblokApi, ISbStoriesParams } from "@storyblok/react/rsc";
+// src/app/page.tsx
+
+// 1. REMOVE the old imports
+// import { getStoryblokApi, ISbStoriesParams } from "@storyblok/react/rsc";
+// import "./lib/storyblok";
+
+// 2. ADD a direct import from your local setup file
+import { getStoryblokApi } from "@/lib/storyblok"; // Use correct path if needed
 import StoryblokStory from "./components/StoryblokStory";
-import "./lib/storyblok"; // <-- IMPORT THE INITIALIZATION FILE HERE
+import type { ISbStoriesParams } from "@storyblok/react/rsc";
+
 
 export default async function Home() {
   const { data } = await fetchData();
@@ -9,12 +17,11 @@ export default async function Home() {
 }
 
 export async function fetchData() {
-  const storyblokApi = getStoryblokApi(); // This will no longer be null
+  // This now uses the pre-configured client you exported
+  const storyblokApi = getStoryblokApi(); 
 
-  // storyblokApi is now initialized and this call will succeed
   const params: ISbStoriesParams = {
     version: "draft",
-    resolve_relations: "page.secondary_bannerpage",
   };
 
   return storyblokApi.get(`cdn/stories/home`, params, { cache: "no-store" });
