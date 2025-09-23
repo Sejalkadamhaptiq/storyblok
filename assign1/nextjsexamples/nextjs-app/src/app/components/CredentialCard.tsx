@@ -1,7 +1,6 @@
 // components/CredentialCard.tsx
-import { storyblokEditable,SbBlokData } from "@storyblok/react";
+import { storyblokEditable,SbBlokData,StoryblokComponent } from "@storyblok/react";
 import Image from "next/image";
-import Link from "next/link";
 
 interface Color {
   color: string;
@@ -15,9 +14,7 @@ export interface CredentialCardBlok extends SbBlokData {
   };
   Title?: string;
   subtitle?: string;
-  link?: {
-    cached_url?: string;
-  };
+  linkview: SbBlokData[];
   title_color:Color;
   subtitle_color:Color;
 }
@@ -50,11 +47,11 @@ const CredentialCard = ({ blok }: CredentialCardProps) => {
       
 
       {/* Link */}
-      {blok.link?.cached_url && (
-        <Link href={blok.link.cached_url} className="mt-4 font-bold text-lg leading-6 underline">
-            View Courses
-        </Link>
-      )}
+ <div className="mt-4">
+        {blok.linkview?.map((nestedBlok) => (
+          <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
+        ))}
+      </div>
     </div>
   );
 };

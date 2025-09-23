@@ -6,6 +6,7 @@ import SecondaryBannerpage from "../app/components/SecondaryBannerpage";
 import Button from "../app/components/Button";
 import FeatureGrid from "@/app/components/FeatureGrid";
 import CredentialCard from "@/app/components/CredentialCard";
+import LinkView from "@/app/components/LinkView";
 
 // This part remains the same
 storyblokInit({
@@ -16,6 +17,8 @@ storyblokInit({
     secondary_bannerpage: SecondaryBannerpage,
     credential_card:CredentialCard,
      feature_grid:FeatureGrid,
+     button:Button,
+     link_view:LinkView
   },
 });
 
