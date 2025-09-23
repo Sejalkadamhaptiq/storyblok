@@ -7,11 +7,11 @@ import {
 } from "@storyblok/react";
 
 // This interface expects a 'body' field containing an array of blocks
-interface PageBlok extends SbBlokData {
+interface getStoryblokApi extends SbBlokData {
   body: SbBlokData[];
 }
 
-const Page = ({ blok }: { blok: PageBlok }) => {
+const Page = ({ blok }: { blok: getStoryblokApi }) => {
   return (
     <main {...storyblokEditable(blok)}>
       {/* This maps over the 'body' array and renders any components inside it */}

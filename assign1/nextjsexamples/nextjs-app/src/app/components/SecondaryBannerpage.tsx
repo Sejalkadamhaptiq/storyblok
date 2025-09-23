@@ -4,80 +4,95 @@ import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 import Image from "next/image";
 import type { SbBlokData } from "@storyblok/react";
 
-// ... (your interface definitions remain the same)
+// Helper interface for the color object from Storyblok's color picker
+interface Color {
+  color: string;
+}
 
 interface Asset {
   filename: string;
   alt: string;
 }
 
+// Interface (as provided in your request)
 interface SecondaryBannerPageBlok extends SbBlokData {
- headline: string;
+  headline: string;
   description: string;
   background_desktop: Asset;
   background_tablet: Asset;
   background_mobile: Asset;
   button_blok: SbBlokData[];
+  heading_text_color: Color;
+  description_text_color: Color;
 }
-
 
 const SecondaryBannerPage = ({ blok }: { blok: SecondaryBannerPageBlok }) => {
   return (
-  <section
-      className="relative mx-auto max-w-[1349px] overflow-hidden"
+    <section
+      // REMOVED: max-w-[1349px]
+      className="relative mx-auto overflow-hidden" // The 'mx-auto' will center it if there's available space, but it won't limit the max-width anymore.
       {...storyblokEditable(blok)}
     >
-      {/* 1. Background Images Layer */}
-      {/* This div holds the absolutely positioned, responsive images. */}
-      {/* The `inset-0` class makes it fill the parent container. */}
+      {/* Background Images Layer (UPDATED with Next.js Image) */}
       <div className="absolute inset-0 z-0">
-        {/* Mobile Image: Visible by default, hidden from 'md' breakpoint up. */}
-        <img
-          src={blok.background_mobile?.filename}
-          alt={blok.background_mobile?.alt || "Background"}
-          className="block h-full w-full object-cover md:hidden"
-        />
-        {/* Tablet Image: Hidden by default, visible from 'md' to 'lg' breakpoints. */}
-        <img
-          src={blok.background_tablet?.filename}
-          alt={blok.background_tablet?.alt || "Background"}
-          className="hidden h-full w-full object-cover md:block lg:hidden"
-        />
-        {/* Desktop Image: Hidden by default, visible from 'lg' breakpoint up. */}
-        <img
-          src={blok.background_desktop?.filename}
-          alt={blok.background_desktop?.alt || "Background"}
-          className="hidden h-full w-full object-cover lg:block"
-        />
+        {/* Mobile Background */}
+        {blok.background_mobile?.filename && (
+          <Image
+            src={blok.background_mobile.filename}
+            alt={blok.background_mobile.alt || "Background"}
+            fill
+            className="block object-cover md:hidden"
+          />
+        )}
+        {/* Tablet Background */}
+        {blok.background_tablet?.filename && (
+          <Image
+            src={blok.background_tablet.filename}
+            alt={blok.background_tablet.alt || "Background"}
+            fill
+            className="hidden object-cover md:block lg:hidden"
+          />
+        )}
+        {/* Desktop Background */}
+        {blok.background_desktop?.filename && (
+          <Image
+            src={blok.background_desktop.filename}
+            alt={blok.background_desktop.alt || "Background"}
+            fill
+            className="hidden object-cover lg:block"
+            priority // Prioritize loading this image for better LCP
+          />
+        )}
       </div>
 
-      {/* 2. Blue Overlay Layer */}
-      {/* This sits on top of the images. `bg-blue-800/60` provides the color and 60% opacity. */}
-    <div className="absolute inset-0 z-10 bg-[#0D2C6B]/80"></div>
-      {/* 3. Content Layer */}
-      {/* The content is relative with a higher z-index (z-20) to appear above the overlay. */}
-      {/* Flexbox is used to center the content vertically and horizontally. */}
-  {/* 3. Content Layer */}
-<div className="relative z-20 flex min-h-[400px] flex-col items-center justify-center p-8 text-center text-white">
-  
-  {/* Headline: Added mb-4 for 16px bottom margin */}
- <span className="font-titillium font-bold text-[40px] leading-[48px] mb-4 text-center text-white">
-  {blok.headline}
-</span>
+      {/* Blue Overlay Layer */}
+      <div className="absolute inset-0 z-10 bg-[#0D2C6B]/80"></div>
 
-  {/* Description: Added mb-6 for 24px bottom margin */}
- <p className="font-arial font-normal text-[18px] mb-6 leading-[24px] text-center text-white">
- {blok.description}
-</p>
-  
-  {/* Button Container: Removed top margin, as the paragraph now controls the spacing */}
-  <div>
-    {blok.button_blok?.map((nestedBlok) => (
-      <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
-    ))}
-  </div>
+      {/* Content Layer */}
+      <div className="relative z-20 flex min-h-[400px] flex-col items-center justify-center p-8 text-center">
+        {/* Headline */}
+        <span
+          className="font-titillium font-bold text-[40px] leading-[48px] mb-4 text-center"
+          style={{ color: blok.heading_text_color?.color }}
+        >
+          {blok.headline}
+        </span>
 
-</div>
+        {/* Description */}
+        <p
+          className="font-arial font-normal text-[18px] mb-6 leading-[24px] text-center"
+          style={{ color: blok.description_text_color?.color }}
+        >
+          {blok.description}
+        </p>
+
+        {/* Button Container */}
+        <div>
+          {blok.button_blok?.map((nestedBlok) => (
+            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

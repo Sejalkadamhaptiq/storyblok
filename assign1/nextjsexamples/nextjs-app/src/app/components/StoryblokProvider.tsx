@@ -6,15 +6,19 @@ import { storyblokInit, apiPlugin } from "@storyblok/react/rsc";
 import Page from "./Page";
 import SecondaryBannerpage from "./SecondaryBannerpage";
 import Button from "./Button";
+import FeatureGrid from "./FeatureGrid";
+import CredentialCard from "./CredentialCard";
+
 
 storyblokInit({
   accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
   use: [apiPlugin],
   components: {
     page: Page,
-    // 2. Add the mapping for your banner component here
     secondary_bannerpage: SecondaryBannerpage,
-    button:Button
+    button: Button,
+    credential_card:CredentialCard,
+    feature_grid:FeatureGrid
   },
 });
 

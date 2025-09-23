@@ -4,6 +4,8 @@ import { apiPlugin, storyblokInit, getStoryblokApi } from "@storyblok/react/rsc"
 import Page from "../app/components/Page";
 import SecondaryBannerpage from "../app/components/SecondaryBannerpage";
 import Button from "../app/components/Button";
+import FeatureGrid from "@/app/components/FeatureGrid";
+import CredentialCard from "@/app/components/CredentialCard";
 
 // This part remains the same
 storyblokInit({
@@ -12,7 +14,8 @@ storyblokInit({
   components: {
     page: Page,
     secondary_bannerpage: SecondaryBannerpage,
-    button: Button,
+    credential_card:CredentialCard,
+     feature_grid:FeatureGrid,
   },
 });
 
